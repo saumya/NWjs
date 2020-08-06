@@ -3,18 +3,31 @@
 	//var os = require('os')
 	//document.write('Our computer is: ', os.platform())
 	//var osName = os.platform()
-/*
+
 	const express = require('express')
 	const app = express()
 	const port = 3000
 	const gui = require('nw.gui')
-*/
+
 	const onOpenDoctorApp = function(){
 		//gui.Window.open(`http://localhost:${port}`, {
 		gui.Window.open('https://doctor.findhealth.today/', { "width": 800, "height": 600 })
 	}
 	const onOpenPatientApp = function(){
 		gui.Window.open('https://letme.findhealth.today/', { "width": 1000, "height": 600 })
+	}
+	const onOpenShareApp = function(){
+		//gui.Window.open('share.html', { "width": 800, "height": 600})
+		// current folder 
+		/*
+		// Windows
+		var path = require('path'); 
+		path.dirname(process.execPath);
+		*/
+		// MacOS
+		let filePath = global.__dirname + '/app/share.html'
+		console.log('filePathath', filePath)
+		gui.Window.open( filePath, { "width": 800, "height": 600} )
 	}
 /*
 	const startServer = function(){
