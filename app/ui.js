@@ -25,7 +25,8 @@
 		path.dirname(process.execPath);
 		*/
 		// MacOS
-		let filePath = global.__dirname + '/app/share.html'
+		const filePath = 'http://localhost:3000/share.html'
+		//const filePath = global.__dirname + '/app/share.html'
 		console.log('filePathath', filePath)
 		gui.Window.open( filePath, { "width": 800, "height": 600} )
 	}
@@ -56,6 +57,9 @@ $(function(){
 
 	const onStartServer = ()=>{
 		console.log( 'onStartServer' )
+		
+		app.use(express.static('app'))
+
 		app.get('/', (req, res) => res.send('Hello World!'))
 		my_server = app.listen(port, () => {
 			console.log(`Application listening at http://localhost:${port}`)
