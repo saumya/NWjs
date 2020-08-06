@@ -19,6 +19,7 @@
 	const onOpenShareApp = function(){
 		//gui.Window.open('share.html', { "width": 800, "height": 600})
 		// current folder 
+		alert('Make sure you started the server before doing this!')
 		/*
 		// Windows
 		var path = require('path'); 
