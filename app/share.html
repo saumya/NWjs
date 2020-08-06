@@ -5,6 +5,43 @@
 
 	<script type="text/javascript" src="libs/jquery-3.5.1.js"></script>
 	<script type="text/javascript" src="libs/webtorrent.min.js"></script>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+	<!--
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/webtorrent@0.108.6/webtorrent.min.js"></script>
+	-->
+
+	
+</head>
+<body>
+
+	<section class="section">
+		<h3 class="title"> Share </h3>
+		<h4 class="subtitle"> The world is free </h4>	
+
+		<p>
+			For the time being, it only supports <strong>.jpg</strong> images.
+		</p>
+		<input class="input" id="inputFile" type="file" name="fileupload" value="fileupload" />
+		<textarea class="textarea is-danger" id="divInfo" placeholder="Please wait for it." style="width:36em; height:14em; overflow: scroll;"></textarea>
+	</section>
+	
+	<section class="section">
+		<div class="field has-addons">
+		  <div class="control is-expanded">
+		    <input id="outputFile" class="input is-success" type="text" placeholder="File Url">
+		  </div>
+		  <div class="control">
+		    <button id="btnGet" class="button is-success"> Get it </button>
+		  </div>
+		</div>
+	</section>
+	
+	<section id="divDownloaded" class="section"></section> 
+	
+
+
 	<script type="text/javascript">
 		$(function(){
 			console.log('ready');
@@ -18,6 +55,8 @@
 				client.seed(fileList, function(torrent){
 					console.log('Seeding',torrent.magnetURI)
 					$('#divInfo').html( torrent.magnetURI )
+					// Copying to Clipboard
+					navigator.clipboard.writeText( torrent.magnetURI )
 				})
 			}
 			/*
@@ -46,23 +85,6 @@
 			$('#btnGet').on('click',onGet);
 		})
 	</script>
-</head>
-<body>
-	<h3>Share</h3>
 
-	<div style="margin:1em;">
-		<input id="inputFile" type="file" name="fileupload" value="fileupload" />
-		<br>
-		<div id="divInfo" />
-	</div>
-	<br>
-	<div style="margin:1em;">
-		<input id="outputFile" type="test" name="fileurl">
-		<button id="btnGet"> Get </button>
-	</div>
-	down
-	<div id="divDownloaded" />
-	<br/>
-	loaded
 </body>
 </html>
