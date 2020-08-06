@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Share </title>
+
+	<script type="text/javascript" src="libs/jquery-3.5.1.js"></script>
+	<script type="text/javascript" src="libs/webtorrent.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			console.log('ready');
+			
+			const onFileChange = function(event){
+				console.log('onFileChange')
+				var fileList = event.target.files
+				console.log(fileList[0])
+			}
+			const onGet = function(){
+				console.log('onGet')
+				//console.log( WebTorrent )
+			}
+
+			$('#inputFile').on('change', onFileChange)
+			$('#btnGet').on('click',onGet);
+		})
+	</script>
+</head>
+<body>
+	<h3>Share</h3>
+	<button id="btnGet"> Get </button>
+	<input id="inputFile" type="file" name="fileupload" value="fileupload" />
+</body>
+</html>
