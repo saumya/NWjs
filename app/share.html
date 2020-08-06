@@ -13,12 +13,43 @@
 				console.log('onFileChange')
 				var fileList = event.target.files
 				console.log(fileList[0])
+
+				const client = new WebTorrent()
+				client.seed(fileList, function(torrent){
+					console.log('Seeding',torrent.magnetURI)
+					$('#divInfo').html( torrent.magnetURI )
+				})
 			}
+			/*
+			const onFileURLChange = function(event){
+				const fileUrl = event.target.value
+				console.log(event.target.value)
+				return false
+			}
+			*/
 			const onGet = function(){
 				console.log('onGet')
 				//console.log( WebTorrent )
+				console.log( $('#outputFile').val() )
+				
+				const client = new WebTorrent()
+				var torrentId = $('#outputFile').val()
+				
+				client.add(torrentId, function (torrent) {
+				  // Torrents can contain many files. Let's use the .mp4 file
+				  var file = torrent.files.find(function (file) {
+				    return file.name.endsWith('.jpg')
+				  })
+
+				  // Display the file by adding it to the DOM.
+				  // Supports video, audio, image files, and more!
+				  //file.appendTo('body')
+				  file.appendTo('#divDownloaded')
+				})
 			}
 
+			//
+			//$('#outputFile').on('change', onFileURLChange)
 			$('#inputFile').on('change', onFileChange)
 			$('#btnGet').on('click',onGet);
 		})
@@ -26,7 +57,20 @@
 </head>
 <body>
 	<h3>Share</h3>
-	<button id="btnGet"> Get </button>
-	<input id="inputFile" type="file" name="fileupload" value="fileupload" />
+
+	<div style="margin:1em;">
+		<input id="inputFile" type="file" name="fileupload" value="fileupload" />
+		<br>
+		<div id="divInfo" />
+	</div>
+	<br>
+	<div style="margin:1em;">
+		<input id="outputFile" type="test" name="fileurl">
+		<button id="btnGet"> Get </button>
+	</div>
+	down
+	<div id="divDownloaded" />
+	<br/>
+	loaded
 </body>
 </html>
