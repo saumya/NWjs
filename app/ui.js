@@ -38,17 +38,34 @@ $(function(){
 	const app = express()
 	const port = 3000
 	const gui = require('nw.gui')
+	//
+	let my_server = null
+
 
 	const onStartServer = ()=>{
 		console.log( 'onStartServer' )
 		app.get('/', (req, res) => res.send('Hello World!'))
-		app.listen(port, () => {
-			console.log(`Example app listening at http://localhost:${port}`)
-			$('#divServerStatus').html( `Server running at : http://localhost:${port}` ) 
+		my_server = app.listen(port, () => {
+			console.log(`Application listening at http://localhost:${port}`)
+			$('#divServerStatus').html( `On : http://localhost:${port}` ) 
+		})
+		my_server.on('connect', (req, clientSocket, head) => {
+			console.log('server : connect')
+		})
+		my_server.on('close', (req, clientSocket, head) => {
+			console.log('server : close')
+		})
+		my_server.on('error', (req, clientSocket, head) => {
+			console.log('server : error')
 		})
 	}
 	const onStopServer = ()=>{
 		console.log('onStopServer')
+		//$('#divServerStatus').html( `Off` )
+		my_server.close( function(){
+			console.log('my_server.close')
+			$('#divServerStatus').html( `Off` )
+		} )
 	}
 	//
 	$('#btnStartServer').on('click', onStartServer)
