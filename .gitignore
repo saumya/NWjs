@@ -1,0 +1,14 @@
+#
+# nwjs
+chromedriver
+credits.html
+libffmpeg.dylib
+minidump_stackwalk
+nwjc
+nwjs.app
+payload
+v8_context_snapshot.bin
+# node
+node_modules
+# application
+app/libs

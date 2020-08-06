@@ -1,0 +1,27 @@
+{
+  "name": "findhealth",
+  "version": "0.1.0",
+  "description": "A simple Node Server",
+  "main": "entry.js",
+  "window": {
+    "title": "desktop findhealth",
+    "icon": "link.png",
+    "toolbar": true,
+    "frame": false,
+    "width": 500,
+    "height": 600,
+    "position": "mouse",
+    "min_width": 400,
+    "min_height": 200,
+    "max_width": 800,
+    "max_height": 600
+  },
+  "webkit": {
+    "plugin": true
+  },
+  "author": "saumya",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
