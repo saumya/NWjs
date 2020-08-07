@@ -20,6 +20,14 @@ npm install webtorrent
 npm install webtorrent-hybrid
 ```
 
+The API are same as `webtorrent`, so only difference would be to call
+
+`require('webtorrent-hybrid')`
+
+instead of `require('webtorrent')`. 
+
+Please refere to [the official code repository][3] for more information. 
+
 
 
 
@@ -46,6 +54,7 @@ npm install webtorrent-hybrid
 
 [1]: https://nwjs.io/
 [2]: https://webtorrent.io/intro
+[3]: https://github.com/webtorrent/webtorrent-hybrid
 
 [ex1]: https://saumya.github.io/NWjs
 [ex2]: https://saumya.github.io/NWjs/app/share.html
