@@ -38,6 +38,8 @@
 		    <button id="btnGet" class="button is-success"> Get it </button>
 		  </div>
 		</div>
+		<div id="divProgressInfo"> Progress </div>
+		<progress id="idProgress" class="progress is-success" value="0.0" max="1"> 0% </progress>
 	</section>
 	
 	<section id="divDownloaded" class="section"></section> 
@@ -70,16 +72,58 @@
 			*/
 			const onGet = function(){
 				const client = new WebTorrent()
-				var torrentId = $('#outputFile').val()
+				let torrentId = $('#outputFile').val()
+
+				//
+				let inervalId
+				let isDone = false 
+				// onDone
+			  const onDone = function(){ 
+			  	console.log('onDone')
+			  	//onProgress() 
+			  	isDone = true
+			  }
+			  // onDone/
+			  // onProgress
+			  const onProgress = function(torrent){
+			  	
+			  	if(isDone){
+			  		clearInterval(inervalId)
+			  	}
+
+		  		//let a = new Date().toDateString()
+		  		//let a = new Date().toLocaleDateString()
+			  	let sTime = new Date().toLocaleTimeString()
+			  	//
+			  	//console.log( 'torrent.progress', torrent.progress )
+			  	let percentDownloaded = Math.round( torrent.progress*100*100 ) / 100
+			  	let userInfoString = sTime + ' | <strong>' + percentDownloaded + '%</strong> Done'
+			  	//
+			  	$('#idProgress')[0].value = torrent.progress
+			  	//
+			  	//console.log( `onProgress : ${a}` )
+			  	$('#divProgressInfo').html( userInfoString )
+
+			  }
+			  // onProgress/
 				
 				client.add(torrentId, function (torrent) {
-				  var file = torrent.files.find(function (file) {
+				  let file = torrent.files.find(function (file) {
 				    return file.name.endsWith('.jpg')
 				  })
+				  
+				  // show in UI
 				  //file.appendTo('body')
 				  file.appendTo('#divDownloaded')
-				})
-			}
+				  
+				  // Trigger statistics refresh
+				  torrent.on('done', onDone)
+				  inervalId = setInterval(onProgress, 500, torrent)
+				  onProgress(torrent)
+
+				})// client.add/
+
+			} // onGet/
 
 			//
 			//$('#outputFile').on('change', onFileURLChange)
