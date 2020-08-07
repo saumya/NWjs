@@ -46,7 +46,7 @@ $(function(){
 
 	var os = require('os')
 	let osName = os.platform()
-	$('#info').html(`OS: ${osName} `)
+	$('#info').html(`OS-${osName} | Node-${process.version} | Running NW-${ (process.versions['nw-flavor']) } | NW-version-${process.versions['node-webkit']} | Platform-${process.platform}`)
 
 	// Express
 	const express = require('express')
