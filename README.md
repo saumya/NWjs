@@ -20,11 +20,7 @@ npm install webtorrent
 npm install webtorrent-hybrid
 ```
 
-The API are same as `webtorrent`, so only difference would be to call
-
-`require('webtorrent-hybrid')`
-
-instead of `require('webtorrent')`. 
+The API are same as `webtorrent`, so only difference would be to call `require('webtorrent-hybrid')` instead of `require('webtorrent')`. 
 
 Please refere to [the official code repository][3] for more information. 
 
