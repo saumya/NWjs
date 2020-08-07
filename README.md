@@ -7,6 +7,20 @@ A playground to experiement [NWjs][1] and web technology.
  - P2P with [webtorrent][2] experiment, [try it here][ex2]
 
 
+```
+npm install webtorrent
+```
+
+
+### Node
+
+ - This `webtorrent-hybrid` is needed in Node environment
+
+```
+npm install webtorrent-hybrid
+```
+
+
 
 
 

@@ -23,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "webtorrent": "^0.108.6"
+    "webtorrent": "^0.108.6",
+    "webtorrent-hybrid": "^4.0.2"
   }
 }
