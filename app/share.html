@@ -42,9 +42,6 @@
 		<p>
 			Share the file directly to others. No server. No cloud. No Login. No password. No middleman. No tracking. No advertisement. It is you in control. As long as you like to share, the file will be shared. When you want to stop sharing, just close this page. Done! 
 		</p>
-		<p>
-			The best part is the more people come to get your file the speed will increase! Which is the exact opposite of a client-server scenario. There is no concept of scaling at the first place, the more the people the better the experience.
-		</p>
 		
 	</section>
 
@@ -64,7 +61,7 @@
 	
 	<section class="section">
 		<h3 class="title"> Receive </h3>
-		<h4 class="subtitle"> Got the URL of the file, get the file now. </h4>
+		<h4 class="subtitle"> Put the file path below to get the file. </h4>
 
 		<div class="field has-addons">
 		  <div class="control is-expanded">
@@ -74,6 +71,7 @@
 		    <button id="btnGet" class="button is-success"> Get it </button>
 		  </div>
 		</div>
+		<div id="divFileInfo"></div>
 		<div id="divProgressInfo"> Progress </div>
 		<progress id="idProgress" class="progress is-success" value="0.0" max="1"> 0% </progress>
 	</section>
@@ -106,6 +104,8 @@
 				return false
 			}
 			*/
+
+			// onGet : EventHandler
 			const onGet = function(){
 
 				$('#divProgressInfo').html( 'Waiting for Handshake ...' )
@@ -115,7 +115,8 @@
 
 				//
 				let inervalId
-				let isDone = false 
+				let isDone = false
+				//let fileToBeDownloaded 
 				// onDone
 			  const onDone = function(){ 
 			  	console.log('onDone')
@@ -125,6 +126,9 @@
 			  // onDone/
 			  // onProgress
 			  const onProgress = function(torrent){
+
+			  	//console.log( 'file.name', fileToBeDownloaded.name )
+			  	//console.log( 'file.progress', fileToBeDownloaded.progress )
 			  	
 			  	if(isDone){
 			  		clearInterval(inervalId)
@@ -145,7 +149,7 @@
 
 			  }
 			  // onProgress/
-				
+				// ----------------------------------------------------------
 				// Torrent Download initialisation
 				client.add(torrentId, function (torrent) {
 				  /*
@@ -157,8 +161,16 @@
 
 				  // any file can be shared now
 				  let file = torrent.files[0]
+				  //fileToBeDownloaded = file
+
 				  console.log( 'torrent.files', torrent.files )
+				  console.log( 'file name', file.name )
+				  console.log( 'file path', file.path )
+				  console.log( 'file length', file.length )
+				  console.log( 'file downloaded', file.downloaded )
+				  console.log( 'file progress', file.progress )
 				  
+				  $('#divFileInfo').html( file.name + ' | <strong>' + (file.length/1000) + ' KB </strong>' )
 				  //$('#divProgressInfo').html( file.name )
 
 				  // show in UI
@@ -175,8 +187,9 @@
 				  onProgress(torrent)
 
 				})// Torrent Download initialisation /
+				// ---------------------------------------------------------- /
 
-			} // onGet/
+			} // onGet/ : EventHandler
 
 			//
 			//$('#outputFile').on('change', onFileURLChange)
