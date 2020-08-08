@@ -52,9 +52,12 @@
 		<h3 class="title"> Send </h3>
 		<h4 class="subtitle"> Select a file to send to someone </h4>
 
+		<!--
 		<div>
 			For the time being, it only supports <strong>.jpg</strong> images.
-		</div>
+		</div> 
+		-->
+
 		<input class="input is-info" id="inputFile" type="file" name="fileupload" value="fileupload" />
 		<textarea class="textarea is-info" id="divInfo" placeholder="Please wait for it." style="width:36em; height:14em; overflow: scroll;"></textarea>
 	</section>
@@ -104,6 +107,9 @@
 			}
 			*/
 			const onGet = function(){
+
+				$('#divProgressInfo').html( 'Waiting for Handshake ...' )
+
 				const client = new WebTorrent()
 				let torrentId = $('#outputFile').val()
 
@@ -140,21 +146,35 @@
 			  }
 			  // onProgress/
 				
+				// Torrent Download initialisation
 				client.add(torrentId, function (torrent) {
+				  /*
+				  // Checking only for .jpg
 				  let file = torrent.files.find(function (file) {
 				    return file.name.endsWith('.jpg')
 				  })
+				  */
+
+				  // any file can be shared now
+				  let file = torrent.files[0]
+				  console.log( 'torrent.files', torrent.files )
 				  
+				  //$('#divProgressInfo').html( file.name )
+
 				  // show in UI
 				  //file.appendTo('body')
-				  file.appendTo('#divDownloaded')
+				  //file.appendTo('#divDownloaded')
+				  file.appendTo('#divDownloaded', function (err, elem) {
+				  	if (err) throw err
+				  	console.log('New DOM node with the content', elem)
+				  })
 				  
 				  // Trigger statistics refresh
 				  torrent.on('done', onDone)
 				  inervalId = setInterval(onProgress, 500, torrent)
 				  onProgress(torrent)
 
-				})// client.add/
+				})// Torrent Download initialisation /
 
 			} // onGet/
 
