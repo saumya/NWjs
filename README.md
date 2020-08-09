@@ -3,6 +3,8 @@ NWjs Experiements
 
 A playground to experiement [NWjs][1] and web technology.
 
+Some of the experiments work on browser directly not needing [NWjs][1]
+
  - Home of [this experiment][ex1]
  - P2P with [webtorrent][2] experiment, [try it here][ex2]
 
