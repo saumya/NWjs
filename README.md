@@ -6,6 +6,7 @@ A playground to experiement [NWjs][1] and web technology.
  - Home of [this experiment][ex1]
  - P2P with [webtorrent][2] experiment, [try it here][ex2]
 
+This has a live example of file sharing.
 
 ```
 npm install webtorrent
